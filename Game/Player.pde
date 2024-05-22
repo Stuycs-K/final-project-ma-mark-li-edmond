@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.util.*;
 
 public class Player{
@@ -20,3 +21,6 @@ public class Player{
     }
    
 }
+=======
+
+>>>>>>> aea1524966f896f3eeddac3cc632b58faf594e52
