@@ -6,6 +6,8 @@
 
 Created our files!! Yay!!!
 
+added basic stuff for each class
+
 ### date y
 
 info
