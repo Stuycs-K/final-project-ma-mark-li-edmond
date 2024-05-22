@@ -13,11 +13,11 @@ added basic stuff for each class
 info
 
 
-## GROUP MEMBER 2
+## EDMOND
 
-### date x
+### 5/22/2024
 
-info
+added the basic visuals in main class
 
 ### date y
 
