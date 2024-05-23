@@ -19,6 +19,6 @@ info
 
 added the basic visuals in main class
 
-### date y
+### 5/22/2024
 
-info
+added method to figure out what image is needed for Card
