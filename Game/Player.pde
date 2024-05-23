@@ -1,9 +1,8 @@
-<<<<<<< HEAD
 import java.util.*;
 
 public class Player{
-    ArrayList<Card> deck = new ArrayList<Card>();
-    Random rng = new Random();
+    public ArrayList<Card> deck = new ArrayList<Card>();
+    public Random rng = new Random();
     
     Card get_random_card(){
         // normal card for now, but fix
@@ -19,8 +18,23 @@ public class Player{
              deck.add(get_random_card());
         }
     }
-   
-}
-=======
+    
+    // TODO: CHOOSE CARD METHOD
 
->>>>>>> aea1524966f896f3eeddac3cc632b58faf594e52
+    // TODO: DRAW UNTIL SATISFACTORY
+    public ArrayList<Card> draw_until(Card last_placed){
+       ArrayList<Card> to_draw = new ArrayList<Card>();
+       while(true){
+          Card c = get_random_card();
+          to_draw.add(c);
+          if(c.can_place(last_placed)) break;
+       }
+       return to_draw;
+    }
+    
+    public void add_to_deck(ArrayList<Card> arr){ 
+      for(Card c: arr){
+         deck.add(c); 
+      }
+    }
+}
