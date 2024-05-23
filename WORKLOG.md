@@ -8,9 +8,9 @@ Created our files!! Yay!!!
 
 added basic stuff for each class
 
-### date y
+### 5/23/2024
 
-info
+added basic methods and instance variables to the bot and player class. going to focus on the game class now
 
 
 ## EDMOND
