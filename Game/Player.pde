@@ -12,6 +12,10 @@ public class Player{
 
 	// TODO: CHOOSE CARD METHOD
 
+   public Card get_random_card() {
+      return new Card(rng.nextInt(4), rng.nextInt(10), rng.nextInt(6)); 
+   }
+
 	// TODO: DRAW UNTIL SATISFACTORY
 	public ArrayList<Card> draw_until(Card last_placed){
 		ArrayList<Card> to_draw = new ArrayList<Card>();
