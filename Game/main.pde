@@ -1,5 +1,15 @@
+public Player you;
+ public ArrayList<Bot> bots; // size is 3
+ public int turn;
+
 void setup() {
- size(1000, 800);
+   size(1000, 800);
+   you = new Player();
+    bots = new ArrayList<Bot>();
+    for(int i = 0; i < 3; i++){
+       bots.add(new Bot());   
+    }
+    turn = 0;
 }
 
 void draw() {
