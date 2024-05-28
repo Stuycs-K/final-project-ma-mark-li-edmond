@@ -5,7 +5,7 @@ public class Bot extends Player{
        super();
    }
    public Card choose_card(Card last_placed){
-       ArrayList<Card> place;
+       ArrayList<Card> place = new ArrayList<Card>();
        for(int i = 0; i < deck.size(); i++){
           if(deck.get(i).can_place(last_placed)){
              place.add(deck.get(i)); 

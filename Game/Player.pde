@@ -13,7 +13,8 @@ public class Player{
 	// TODO: CHOOSE CARD METHOD
 
    public Card get_random_card() {
-      return new Card(rng.nextInt(4), rng.nextInt(10), rng.nextInt(6)); 
+       int type = rng.nextInt(5) <= 2 ? 0 : rng.nextInt(6);
+      return new Card(rng.nextInt(4), rng.nextInt(10), type); 
    }
 
 	// TODO: DRAW UNTIL SATISFACTORY

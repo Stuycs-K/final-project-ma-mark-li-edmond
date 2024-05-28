@@ -32,7 +32,7 @@ class Card{
 		return true;
 	}
 	public void identifyCard(int col, int number, int type) {
-		if (this.type <= 4) {
+		if (this.type >= 4) {
       if (this.type == 5) {
        sprite = loadImage("Images/wild_colora_changer_large.png"); 
       } else {
