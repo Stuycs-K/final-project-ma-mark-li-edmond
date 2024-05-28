@@ -22,3 +22,7 @@ added the basic visuals in main class
 ### 5/22/2024
 
 added method to figure out what image is needed for Card
+
+### 5/28/2024
+
+fixed images to properly load 
