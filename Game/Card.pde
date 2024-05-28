@@ -34,50 +34,50 @@ class Card{
 	public void identifyCard(int col, int number, int type) {
 		if (this.type <= 4) {
       if (this.type == 5) {
-       sprite = loadImage("wild_colora_changer_large.png"); 
+       sprite = loadImage("Images/wild_colora_changer_large.png"); 
       } else {
-			  sprite = loadImage("wild_pick_four_large.png");
+			  sprite = loadImage("Images/wild_pick_four_large.png");
       }
 		} else {
 			if (this.col == 0) {
 				if (this.type == 1) {
-					sprite = loadImage("red_reverse_large.png");
+					sprite = loadImage("Images/red_reverse_large.png");
 				} else if (this.type == 2) {
-					sprite = loadImage("red_skip_large.png");
+					sprite = loadImage("Images/red_skip_large.png");
 				} else if (this.type == 3) {
-					sprite = loadImage("red_picker_large.png"); 
+					sprite = loadImage("Images/red_picker_large.png"); 
 				} else {
-					sprite = loadImage("red_" + number + "_large.png");
+					sprite = loadImage("Images/red_" + number + "_large.png");
 				}
 			} else if (this.col == 1) {
 				if (this.type == 1) {
-					sprite = loadImage("green_reverse_large.png");
+					sprite = loadImage("Images/green_reverse_large.png");
 				} else if (this.type == 2) {
-					sprite = loadImage("green_skip_large.png");
+					sprite = loadImage("Images/green_skip_large.png");
 				} else if (this.type == 3) {
-					sprite = loadImage("green_picker_large.png"); 
+					sprite = loadImage("Images/green_picker_large.png"); 
 				} else {
-					sprite = loadImage("green_" + number + "_large.png");
+					sprite = loadImage("Images/green_" + number + "_large.png");
 				}
 			} else if (this.col == 2) {
 				if (this.type == 1) {
-					sprite = loadImage("blue_reverse_large.png");
+					sprite = loadImage("Images/blue_reverse_large.png");
 				} else if (this.type == 2) {
-					sprite = loadImage("blue_skip_large.png");
+					sprite = loadImage("Images/blue_skip_large.png");
 				} else if (this.type == 3) {
-					sprite = loadImage("blue_picker_large.png"); 
+					sprite = loadImage("Images/blue_picker_large.png"); 
 				} else {
-					sprite = loadImage("blue_" + number + "_large.png");
+					sprite = loadImage("Images/blue_" + number + "_large.png");
 				}
 			} else if (this.col == 3) {
 				if (this.type == 1) {
-					sprite = loadImage("yellow_reverse_large.png");
+					sprite = loadImage("Images/yellow_reverse_large.png");
 				} else if (this.type == 2) {
-					sprite = loadImage("yellow_skip_large.png");
+					sprite = loadImage("Images/yellow_skip_large.png");
 				} else if (this.type == 3) {
-					sprite = loadImage("yellow_picker_large.png"); 
+					sprite = loadImage("Images/yellow_picker_large.png"); 
 				} else {
-					sprite = loadImage("yellow_" + number + "_large.png");
+					sprite = loadImage("Images/yellow_" + number + "_large.png");
 				} 
 			} 
 		}
