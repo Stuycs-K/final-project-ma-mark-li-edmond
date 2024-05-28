@@ -2,6 +2,7 @@ public Player you;
 public ArrayList<Bot> bots; // size is 3
 public int turn;
 public Card lastCard;
+public int start = 300;
 
 public Card get_random_card() {
     Random rng = new Random();
@@ -42,14 +43,44 @@ void draw() {
 }
 
 void drawPlayer(){
-  int start = 300;
     for(int i = 0; i < you.deck.size(); i++){
        image(you.deck.get(i).sprite, start + i * 50, 600, 50, 100); 
     }
 }
 
 void playerTurn(){
-  
+  boolean flag = false;
+  for (int i = 0; i < you.deck.size(); i++) {
+     if (you.deck.get(i).can_place(lastCard)) {
+        flag = true; 
+     }
+  }
+  if (!flag) {
+    you.add_to_deck(you.draw_until(lastCard));
+  }
+}
+
+void mousePressed() {
+  if (turn % 4 == 0) {
+    int card_index = overCards(mouseX, mouseY);
+    if (card_index >= 0 && you.deck.get(card_index).can_place(lastCard)) {
+       image(you.deck.get(card_index).sprite, 450, 350, 80, 160); 
+       lastCard = you.deck.get(card_index);
+       you.deck.remove(card_index);
+       //turn++; until we implement bot turn
+    }
+  }
+}
+
+int overCards(int x, int y) {
+  for (int i = 0; i < you.deck.size(); i++) {
+    if ((x > start + i * 50) && (x < start + (i+1) * 50)) {
+       if (y >= 600 && y < 700) {
+          return i;
+       }
+    }
+  }
+  return -1;
 }
 
 void botTurn(int index){
