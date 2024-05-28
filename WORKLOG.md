@@ -28,4 +28,4 @@ added method to figure out what image is needed for Card
 
 ### 5/28/2024
 
-fixed images to properly load 
+fixed images to properly load and wrote player_turn code (clicking a card to place) 
