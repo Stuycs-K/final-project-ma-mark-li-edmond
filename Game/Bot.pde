@@ -16,6 +16,6 @@ public class Bot extends Player{
           add_to_deck(draw_until(last_placed));
           return null;
        }
-       return place.get(rng.nextInt(place.size()));
+       return super.deck.remove(rng.nextInt(place.size()));
    }
 }
