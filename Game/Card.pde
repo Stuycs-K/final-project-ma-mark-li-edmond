@@ -11,6 +11,8 @@ class Card{
 	// type = 3 -> +2 card
 	// type = 4 -> +4 card
   // type = 5 -> wild card
+  public int minCol, minRow, maxCol, maxRow;
+  
 
 	PImage sprite; // image for the thing
 
@@ -20,7 +22,7 @@ class Card{
 		this.type = type;
 		identifyCard(col, number, type);
 	}
-
+  
 	public boolean can_place(Card other){
 		if(this.type <= 3){
       if (type == 0) {
@@ -31,6 +33,18 @@ class Card{
 		}
 		return true;
 	}
+  
+  public void set(int x1, int y1, int x2, int y2) {
+    minRow = x1;
+    minCol = y1;
+    maxRow = x2;
+    maxCol = y2;
+  }
+  
+  public boolean inBounds(int x, int y) {
+    return (x >= minRow && x <= maxRow && y >= minCol && y <= maxCol); 
+  }
+  
 	public void identifyCard(int col, int number, int type) {
 		if (this.type >= 4) {
       if (this.type == 5) {

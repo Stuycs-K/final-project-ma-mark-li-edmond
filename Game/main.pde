@@ -81,7 +81,8 @@ void mousePressed() {
 
 int overCards(int x, int y) {
   for (int i = 0; i < you.deck.size(); i++) {
-    if ((x > start + i * 50) && (x < start + (i+1) * 50)) {
+    you.deck.get(i).set(start+i*50, 600, start+(i+1)*50, 700);
+    if ((x > start + i * 50) && (x < start + (i+1) * 50)) { // fix variables note
        if (y >= 600 && y < 700) {
           return i;
        }
