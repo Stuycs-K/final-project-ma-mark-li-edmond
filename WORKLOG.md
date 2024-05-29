@@ -16,6 +16,10 @@ added basic methods and instance variables to the bot and player class. going to
 
 Modified the structure (removed game class and put it in main) and added displays for player cards and counter for bot cards in the main class. The visuals are about done for MVP. its just functionality of the game now.
 
+### 5/29/2024
+
+Implemented the fundamentals of the game. Implemented text for choosing cards, basic bot functuality, and a turn order.
+
 ## EDMOND
 
 ### 5/22/2024
