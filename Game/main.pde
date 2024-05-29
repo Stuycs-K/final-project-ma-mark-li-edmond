@@ -3,6 +3,7 @@ public ArrayList<Bot> bots; // size is 3
 public int turn;
 public Card lastCard;
 public int start = 300;
+public boolean invalidCard;
 
 public Card get_random_card() {
     Random rng = new Random();
@@ -18,6 +19,7 @@ void setup() {
     }
     turn = 0;
     lastCard = get_random_card();
+    invalidCard = false;
 }
 
 void draw() {
@@ -36,6 +38,7 @@ void draw() {
  drawPlayer();
  if(turn % 4 == 0){
     playerTurn(); 
+    if(invalidCard) text("Invalid Card", 400, 400); 
  }
  else{
     botTurn(turn % 4 - 1); 
@@ -58,6 +61,7 @@ void playerTurn(){
   if (!flag) {
     you.add_to_deck(you.draw_until(lastCard));
   }
+  // turn++;
 }
 
 void mousePressed() {
@@ -67,7 +71,10 @@ void mousePressed() {
        image(you.deck.get(card_index).sprite, 450, 350, 80, 160); 
        lastCard = you.deck.get(card_index);
        you.deck.remove(card_index);
-       //turn++; until we implement bot turn
+      invalidCard = false;  
+  }
+    else if(card_index >= 0 && !you.deck.get(card_index).can_place(lastCard)){
+       invalidCard = true;
     }
   }
 }
