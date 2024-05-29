@@ -38,6 +38,27 @@ void draw() {
  text(bots.get(0).deck.size(), 160, 410); // left display
  text(bots.get(1).deck.size(), 500, 180); // top display
  text(bots.get(2).deck.size(), 840, 410); // right display
+ 
+ 
+   if(you.deck.size() == 0){
+    background(0);
+    textSize(50);
+     text(bots.get(0).deck.size(), 160, 410); // left display
+     text(bots.get(1).deck.size(), 500, 180); // top display
+     text(bots.get(2).deck.size(), 840, 410); // right display
+    text("you won, you noob", 400, 400);
+    return;
+  }
+  if(bots.get(0).deck.size() == 0 || bots.get(1).deck.size() == 0 || bots.get(2).deck.size() == 0){
+     text(bots.get(0).deck.size(), 160, 410); // left display
+     text(bots.get(1).deck.size(), 500, 180); // top display
+     text(bots.get(2).deck.size(), 840, 410); // right display
+    textSize(50);
+    text("you lost, you noob", 400, 400);
+    return;
+  }
+ 
+ 
  image(lastCard.sprite, 450, 350, 80, 160); // last card
  drawPlayer();
  text(turn,200,200);
