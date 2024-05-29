@@ -33,3 +33,7 @@ added method to figure out what image is needed for Card
 ### 5/28/2024
 
 fixed images to properly load and wrote player_turn code (clicking a card to place) 
+
+### 5/29/2024
+
+Implemented card borders for future use when deck gets too big
