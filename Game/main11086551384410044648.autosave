@@ -2,6 +2,7 @@ public Player you;
 public ArrayList<Bot> bots; // size is 3
 public int turn;
 public Card lastCard;
+public int start = 300;
 public int drawedCardTime;
 public int invalidCardTime;
 public boolean turnOrder;
@@ -29,14 +30,8 @@ void draw() {
  fill(179,98,51);
  rect(110, 100, 800, 600); // the big brown
  fill(235,218,65);
- if(turn == 1) fill(100,100,100);
- else fill(235,218,65);
  rect(120, 350, 100, 100); // left
- if(turn == 2) fill(100,100,100);
- else fill(235,218,65);
  rect(455, 120, 100, 100); // top
- if(turn == 3) fill(100,100,100);
- else fill(235,218,65);
  rect(800, 350, 100, 100); // right
  textSize(40);
  fill(0,0,0);
@@ -65,7 +60,6 @@ void draw() {
  
  
  image(lastCard.sprite, 450, 350, 80, 160); // last card
- initializePlayer();
  drawPlayer();
  text(turn,200,200);
  if(turn % 4 == 0){
@@ -84,18 +78,9 @@ void draw() {
  turn %= 4;
 }
 
-void initializePlayer(){
-   // READJUST HERE
-   int start = 300 - 10 * max(0, you.deck.size() - 8);
-   for(int i = 0; i < you.deck.size(); i++){
-      you.deck.get(i).set(start+i*50 ,600, start+(i+1)*50, 700); 
-   }
-}
-
 void drawPlayer(){
     for(int i = 0; i < you.deck.size(); i++){
-      Card c = you.deck.get(i); 
-      image(c.sprite, c.minRow, c.minCol, c.maxRow - c.minRow, c.maxCol - c.minCol); 
+       image(you.deck.get(i).sprite, start + i * 50, 600, 50, 100); 
     }
 }
 
@@ -132,9 +117,13 @@ void mousePressed() {
 }
 
 int overCards(int x, int y) {
-  for(int i = 0; i < you.deck.size(); i++){
-      Card c = you.deck.get(i);
-      if(x >= c.minRow && x <= c.maxRow && y >= c.minCol && y <= c.maxCol) return i;
+  for (int i = 0; i < you.deck.size(); i++) {
+    you.deck.get(i).set(start+i*50, 600, start+(i+1)*50, 700);
+    if ((x > start + i * 50) && (x < start + (i+1) * 50)) { // fix variables note
+       if (y >= 600 && y < 700) {
+          return i;
+       }
+    }
   }
   return -1;
 }
@@ -142,9 +131,7 @@ int overCards(int x, int y) {
 void botTurn(int index){
     Card chosen = bots.get(index).choose_card(lastCard);
     if(chosen != null){
-        if (chosen.type > 0) {
-          if (isSkipCard(chosen)) { turn++; } 
-        }
+        
         image(chosen.sprite, 450, 350, 80, 160); 
     }
     turn++;
