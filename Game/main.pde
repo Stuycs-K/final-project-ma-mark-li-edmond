@@ -101,6 +101,9 @@ void mousePressed() {
   if (turn % 4 == 0) {
     int card_index = overCards(mouseX, mouseY);
     if (card_index >= 0 && you.deck.get(card_index).can_place(lastCard)) {
+       if (you.deck.get(card_index).type > 0) {
+         if (isSkipCard(you.deck.get(card_index))) { turn++; } 
+       }
        image(you.deck.get(card_index).sprite, 450, 350, 80, 160); 
        lastCard = you.deck.get(card_index); // TODO: void sprite of placed card
        you.deck.remove(card_index);
@@ -131,4 +134,11 @@ void botTurn(int index){
         image(chosen.sprite, 450, 350, 80, 160); 
     }
     turn++;
+}
+
+boolean isSkipCard(Card c) {
+  if (c.type == 2) {
+     return true;
+  }
+  return false;
 }
