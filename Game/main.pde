@@ -5,6 +5,8 @@ public Card lastCard;
 public int drawedCardTime;
 public int invalidCardTime;
 public boolean turnOrder;
+PImage arrow;
+PImage leftArrow;
 
 public Card get_random_card() {
     Random rng = new Random();
@@ -23,6 +25,8 @@ void setup() {
     invalidCardTime = -69420;
     drawedCardTime = -69420;
     turnOrder = true; // TODO IMPLEMENT ARROWS
+    arrow = loadImage("Images/arrow.png");
+    leftArrow = loadImage("Images/leftArrow.png");
 }
 
 void draw() {
@@ -43,7 +47,7 @@ void draw() {
  text(bots.get(0).deck.size(), 160, 410); // left display
  text(bots.get(1).deck.size(), 500, 180); // top display
  text(bots.get(2).deck.size(), 840, 410); // right display
- 
+ drawArrow();
  
    if(you.deck.size() == 0){
     background(0);
@@ -82,6 +86,11 @@ void draw() {
     botTurn(turn % 4 - 1); 
  }
  turn %= 4;
+}
+
+void drawArrow(){
+  if(turnOrder) image(arrow, 450, 520, 50, 50);
+  else image(leftArrow, 450, 520, 50, 50);
 }
 
 void initializePlayer(){
