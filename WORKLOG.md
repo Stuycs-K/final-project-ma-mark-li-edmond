@@ -20,6 +20,10 @@ Modified the structure (removed game class and put it in main) and added display
 
 Implemented the fundamentals of the game. Implemented text for choosing cards, basic bot functuality, and a turn order.
 
+### 5/30/2024
+
+Implemented arrows and visual indicators for turns
+
 ## EDMOND
 
 ### 5/22/2024
