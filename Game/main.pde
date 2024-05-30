@@ -8,10 +8,10 @@ public boolean turnOrder;
 PImage arrow;
 PImage leftArrow;
 
-public Card get_random_card() {
+public Card get_start_card() { 
     Random rng = new Random();
     return new Card(rng.nextInt(4), rng.nextInt(10), 0); 
- }
+}
 
 void setup() {
    size(1000, 800);
@@ -21,7 +21,7 @@ void setup() {
        bots.add(new Bot());   
     }
     turn = 0;
-    lastCard = get_random_card();
+    lastCard = get_start_card();
     invalidCardTime = -69420;
     drawedCardTime = -69420;
     turnOrder = true; // TODO IMPLEMENT ARROWS
@@ -126,7 +126,7 @@ void mousePressed() {
     int card_index = overCards(mouseX, mouseY);
     if (card_index >= 0 && you.deck.get(card_index).can_place(lastCard)) {
        if (you.deck.get(card_index).type > 0) {
-         if (isSkipCard(you.deck.get(card_index))) { turn++; } 
+         if (you.deck.get(card_index).type == 2) { turn++; } // skip card
        }
        image(you.deck.get(card_index).sprite, 450, 350, 80, 160); 
        lastCard = you.deck.get(card_index); // TODO: void sprite of placed card
@@ -150,18 +150,14 @@ int overCards(int x, int y) {
 
 void botTurn(int index){
     Card chosen = bots.get(index).choose_card(lastCard);
-    if(chosen != null){
-        if (chosen.type > 0) {
-          if (isSkipCard(chosen)) { turn++; } 
-        }
-        image(chosen.sprite, 450, 350, 80, 160); 
+    if(chosen == null){
+        chosen = bots.get(index).choose_card(lastCard); // choose_card performs draw_until
+    } 
+    if (chosen.type > 0) {
+       if (chosen.type == 2) { turn++; } // skip card
     }
+    image(chosen.sprite, 450, 350, 80, 160);
+    lastCard = chosen;
+    bots.get(index).deck.remove(chosen);
     turn++;
-}
-
-boolean isSkipCard(Card c) {
-  if (c.type == 2) {
-     return true;
-  }
-  return false;
 }

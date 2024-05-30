@@ -18,17 +18,24 @@ class Card{
 
 	public Card(int col, int number, int type){
 		this.col = col;
-		this.number = number;
+    if (type > 0) {
+     this.number = -1; 
+    } else {
+		 this.number = number;
+    }
 		this.type = type;
 		identifyCard(col, number, type);
 	}
   
+  public String toString() {
+    return this.col + ", " + this.number + ", " + this.type;
+  }
 	public boolean can_place(Card other){
 		if(this.type <= 3){
-      if (type == 0) {
-			  return this.col == other.col || this.number == other.number;
+      if (other.type == 0) {
+			  return (this.col == other.col) || (this.number == other.number);
       } else {
-        return this.col == other.col || this.type == other.type; 
+        return (this.col == other.col) || (this.type == other.type); 
       }
 		}
 		return true;
