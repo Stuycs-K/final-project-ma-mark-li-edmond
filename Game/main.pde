@@ -5,7 +5,7 @@ public Card lastCard;
 public int drawedCardTime;
 public int invalidCardTime;
 public boolean turnOrder;
-PImage arrow;
+PImage rightArrow;
 PImage leftArrow;
 
 public Card get_start_card() { 
@@ -25,8 +25,8 @@ void setup() {
     invalidCardTime = -69420;
     drawedCardTime = -69420;
     turnOrder = true; // TODO IMPLEMENT ARROWS
-    arrow = loadImage("Images/arrow.png");
-    leftArrow = loadImage("Images/leftArrow.png");
+    rightArrow = loadImage("Images/right_arrow.png");
+    leftArrow = loadImage("Images/left_arrow.png");
 }
 
 void draw() {
@@ -89,7 +89,7 @@ void draw() {
 }
 
 void drawArrow(){
-  if(turnOrder) image(arrow, 450, 520, 50, 50);
+  if(turnOrder) image(rightArrow, 450, 520, 50, 50);
   else image(leftArrow, 450, 520, 50, 50);
 }
 
