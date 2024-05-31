@@ -41,3 +41,7 @@ fixed images to properly load and wrote player_turn code (clicking a card to pla
 ### 5/29/2024
 
 Implemented card borders for future use when deck gets too big
+
+### 5/30/2024
+
+fixed the bots breaking the rules, starting skip/reverse/special cards, added arrow images
