@@ -5,6 +5,7 @@ public Card lastCard;
 public int drawedCardTime;
 public int invalidCardTime;
 public boolean turnOrder;
+public boolean colorChoose;
 PImage rightArrow;
 PImage leftArrow;
 
@@ -74,6 +75,16 @@ void draw() {
  text(turn,200,200);
  if(turn % 4 == 0){
     playerTurn(); 
+    if (colorChoose) {
+      fill(255, 0, 0);
+      rect(450, 350, 40, 80); // red
+      fill(0, 0, 255);
+      rect(490, 350, 40, 80); // blue
+      fill(0, 255, 0); 
+      rect(450, 430, 40, 80); // green
+      fill(255, 255, 0);
+      rect(490, 430, 40, 80); // yellow
+    }
     if(millis() - drawedCardTime < 3000){
        textSize(20);
        text("No Valid Cards. Automatically Drew Cards", 300, 400);   // maybe animate drawing card one by one
@@ -127,6 +138,13 @@ void mousePressed() {
     if (card_index >= 0 && you.deck.get(card_index).can_place(lastCard)) {
        if (you.deck.get(card_index).type > 0) {
          if (you.deck.get(card_index).type == 2) { turn++; } // skip card
+         if (you.deck.get(card_index).type >= 4) { 
+           colorChoose = true;
+           //int color_num = overColors(mouseX, mouseY);
+           //while(colorChoose) {
+             
+           //}
+         }
        }
        image(you.deck.get(card_index).sprite, 450, 350, 80, 160); 
        lastCard = you.deck.get(card_index); // TODO: void sprite of placed card
@@ -146,6 +164,25 @@ int overCards(int x, int y) {
       if(x >= c.minRow && x <= c.maxRow && y >= c.minCol && y <= c.maxCol) return i;
   }
   return -1;
+}
+
+int overColors(int x, int y) {
+    if (x >= 450 && y >= 350) {
+       if (x < 490) {
+         if (y < 350) {
+          return 0; // red
+         } else if (y > 350 && y < 430) {
+          return 1; // green
+         }
+       } else if (x < 610) {
+         if (y < 350) {
+          return 2; // blue
+         } else if (y > 350 && y < 430) {
+          return 3; // yellow 
+         }
+       } 
+    }
+    return -1;
 }
 
 void botTurn(int index){
