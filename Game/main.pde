@@ -5,7 +5,7 @@ public Card lastCard;
 public int drawedCardTime;
 public int invalidCardTime;
 public boolean turnOrder;
-public boolean colorChoose;
+public boolean wild;
 PImage rightArrow;
 PImage leftArrow;
 
@@ -25,6 +25,7 @@ void setup() {
     lastCard = get_start_card();
     invalidCardTime = -69420;
     drawedCardTime = -69420;
+    wild = false;
     turnOrder = true; // TODO IMPLEMENT ARROWS
     rightArrow = loadImage("Images/right_arrow.png");
     leftArrow = loadImage("Images/left_arrow.png");
@@ -75,15 +76,8 @@ void draw() {
  text(turn,200,200);
  if(turn % 4 == 0){
     playerTurn(); 
-    if (colorChoose) {
-      fill(255, 0, 0);
-      rect(450, 350, 40, 80); // red
-      fill(0, 0, 255);
-      rect(490, 350, 40, 80); // blue
-      fill(0, 255, 0); 
-      rect(450, 430, 40, 80); // green
-      fill(255, 255, 0);
-      rect(490, 430, 40, 80); // yellow
+    if (wild) {
+      createColorBounds();
     }
     if(millis() - drawedCardTime < 3000){
        textSize(20);
@@ -133,28 +127,34 @@ void playerTurn(){
 }
 
 void mousePressed() {
+  if (turn % 4 == 0 && wild) { // change to >= 4 for +4 card after wild card test
+    System.out.println("hey");
+    int color_num = overColors(mouseX, mouseY); 
+    while (!(color_num >= 0)) {}
+    lastCard = new Card(color_num, -1, 5); // also change parameter for +4 or wild
+    image(lastCard.sprite, 450, 350, 80, 160);
+    wild = false;
+    turn++;
+  } else {
   if (turn % 4 == 0) {
     int card_index = overCards(mouseX, mouseY);
     if (card_index >= 0 && you.deck.get(card_index).can_place(lastCard)) {
        if (you.deck.get(card_index).type > 0) {
          if (you.deck.get(card_index).type == 2) { turn++; } // skip card
-         if (you.deck.get(card_index).type >= 4) { 
-           colorChoose = true;
-           //int color_num = overColors(mouseX, mouseY);
-           //while(colorChoose) {
-             
-           //}
-         }
+         if (you.deck.get(card_index).type == 5) { wild = true; }
        }
        image(you.deck.get(card_index).sprite, 450, 350, 80, 160); 
        lastCard = you.deck.get(card_index); // TODO: void sprite of placed card
        you.deck.remove(card_index);
        invalidCardTime = -69420;
-       turn++;
+       if (!wild) {
+         turn++;
+       }
   }
     else if(card_index >= 0 && !you.deck.get(card_index).can_place(lastCard)){
        invalidCardTime = millis();
     }
+  }
   }
 }
 
@@ -167,22 +167,27 @@ int overCards(int x, int y) {
 }
 
 int overColors(int x, int y) {
-    if (x >= 450 && y >= 350) {
-       if (x < 490) {
-         if (y < 350) {
-          return 0; // red
-         } else if (y > 350 && y < 430) {
-          return 1; // green
-         }
-       } else if (x < 610) {
-         if (y < 350) {
-          return 2; // blue
-         } else if (y > 350 && y < 430) {
-          return 3; // yellow 
-         }
-       } 
-    }
-    return -1;
+  if ((x >= 450 && x < 490) && (y >= 350 && y < 430)) {
+    return 0; // red 
+  } else if ((x >= 450 && x < 490) && (y >= 430 && y < 510)) {
+    return 1; // green
+  } else if ((x >= 490 && x < 530) && (y >= 350 && y < 430)) {
+    return 2; // blue
+  } else if ((x >= 490 && x < 530) && (y >= 430 && y < 510)) {
+    return 3; // yellow
+  }
+  return -1;
+}
+
+void createColorBounds() {
+  fill(255, 0, 0);
+  rect(450, 350, 40, 80); // red
+  fill(0, 0, 255);
+  rect(490, 350, 40, 80); // blue
+  fill(0, 255, 0); 
+  rect(450, 430, 40, 80); // green
+  fill(255, 255, 0);
+  rect(490, 430, 40, 80); // yellow
 }
 
 void botTurn(int index){
