@@ -255,10 +255,6 @@ void botTurn(int index) {
       }
       turn++;
     } // skip card
-    if (chosen.type == 5) {
-      Random rng = new Random();
-      int oh = rng.nextInt(bots.get(index).deck.size());
-    }
   }
   image(chosen.sprite, 450, 350, 80, 160);
   lastCard = chosen;
