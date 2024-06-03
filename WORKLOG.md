@@ -24,6 +24,10 @@ Implemented the fundamentals of the game. Implemented text for choosing cards, b
 
 Implemented arrows and visual indicators for turns
 
+## 6/3/2024
+
+Implemented reverse card functionalities
+
 ## EDMOND
 
 ### 5/22/2024
