@@ -161,7 +161,12 @@ void mousePressed() {
     int color_num = overColors(mouseX, mouseY);
     while (!(color_num >= 0)) {}
     lastCard = new Card(color_num, -1, 5); // also change parameter for +4 or wild
-    image(lastCard.sprite, 450, 350, 80, 160);
+    //image(lastCard.sprite, 450, 350, 80, 160);
+    if (color_num == 0) { fill(255,0,0); }
+    else if (color_num == 1) { fill(0,255,0); }
+    else if (color_num == 2) { fill(0,0,255); }
+    else if (color_num == 3) { fill(255,255,0); }
+    rect(450,350,80,160);
     wild = false;
     incrementTurn();
   } else {
