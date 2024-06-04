@@ -272,7 +272,7 @@ void botTurn(int index) {
     // reverse
     if(chosen.type == 1){
        turnOrder = !turnOrder; 
-
+    }
      if (chosen.type == 5) {
       Random rng = new Random();
       int oh = rng.nextInt(bots.get(index).deck.size());
