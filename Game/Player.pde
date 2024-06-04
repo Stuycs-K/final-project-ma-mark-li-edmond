@@ -14,6 +14,7 @@ public class Player{
 
    public Card get_random_card() {
       //  return new Card(rng.nextInt(4), rng.nextInt(10), 2); rig skips
+      // return new Card(rng.nextInt(4), rng.nextInt(10), 1); // rig riverse
        int type = rng.nextInt(5) <= 2 ? 0 : rng.nextInt(6);
       return new Card(rng.nextInt(4), rng.nextInt(10), type); 
    }
