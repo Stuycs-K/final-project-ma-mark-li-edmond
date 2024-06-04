@@ -53,3 +53,11 @@ Implemented card borders for future use when deck gets too big
 ### 5/30/2024
 
 fixed the bots breaking the rules, starting skip/reverse/special cards, added arrow images
+
+### 6/2/2024
+
+implemented wild card functionality for playerTurn 
+
+### 6/4/2024
+
+Implemented wild card for bot somewhat working
