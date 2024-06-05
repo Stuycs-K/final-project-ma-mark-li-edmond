@@ -17,7 +17,7 @@ public class Bot extends Player{
           return null;
        }
        Card c = place.get(rng.nextInt(place.size()));
-       super.deck.remove(c); // change super ??
+       super.deck.remove(c);
        return c;
    }
 }

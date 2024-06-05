@@ -6,6 +6,7 @@ public int drawedCardTime;
 public int invalidCardTime;
 public boolean turnOrder;
 public boolean wild;
+public int stack;
 PImage rightArrow;
 PImage leftArrow;
 PImage upArrow;
@@ -32,6 +33,7 @@ void setup() {
   invalidCardTime = -69420;
   drawedCardTime = -69420;
   wild = false;
+  stack = 0;
   turnOrder = true; // TODO IMPLEMENT ARROWS
   rightArrow = loadImage("Images/right_arrow.png");
   leftArrow = loadImage("Images/left_arrow.png");
@@ -145,6 +147,12 @@ void drawPlayer() {
 }
 
 void playerTurn() {
+  //if (lastCard.type == 4) {
+  //  for (int i = 0; i < stack; i++) {
+  //    you.deck.add(you.get_random_card()); 
+  //  }
+  //  stack = 0;
+  //}
   boolean flag = false;
   for (int i = 0; i < you.deck.size(); i++) {
     if (you.deck.get(i).can_place(lastCard)) {
@@ -158,11 +166,15 @@ void playerTurn() {
 }
 
 void mousePressed() {
-  if (turn % 4 == 0 && wild) { // change to >= 4 for +4 card after wild card test
+  if (turn % 4 == 0 && wild) {
     // System.out.println("hey");
     int color_num = overColors(mouseX, mouseY);
     while (!(color_num >= 0)) {}
-    lastCard = new Card(color_num, -1, 5); // also change parameter for +4 or wild
+    if (lastCard.type == 4) {
+      lastCard = new Card(color_num, -1, 4);
+    } else {
+      lastCard = new Card(color_num, -1, 5); 
+    }
     if (color_num == 0) { fill(255,0,0); }
     else if (color_num == 1) { fill(0,255,0); }
     else if (color_num == 2) { fill(0,0,255); }
@@ -174,6 +186,12 @@ void mousePressed() {
     if (turn % 4 == 0) {
       int card_index = overCards(mouseX, mouseY);
       if (card_index >= 0 && you.deck.get(card_index).can_place(lastCard)) {
+        if (!(you.deck.get(card_index).type == 3 && lastCard.type == 3)){
+          for (int i = 0; i < stack; i++) {
+             you.deck.add(you.get_random_card());
+          }
+          stack = 0;
+        }
         if (you.deck.get(card_index).type > 0) {
           if (you.deck.get(card_index).type == 2) {
             // display stop png
@@ -188,10 +206,13 @@ void mousePressed() {
           if (you.deck.get(card_index).type == 5) {
             wild = true;
           } // wild card
-           // +4 card
-           
-           // add later if your name is edmond
-          // if(you.deck.get(card_index).type == 
+           if (you.deck.get(card_index).type == 3) {
+             stack += 2;
+           } // +2 card
+           if(you.deck.get(card_index).type == 4) {
+             wild = true;
+             stack += 4;
+           } // +4 card
            
            //  reverse card
            if(you.deck.get(card_index).type == 1){
@@ -247,9 +268,33 @@ void createColorBounds() {
 
 void botTurn(int index) {
   int botCol = -1;
-  Card chosen = bots.get(index).choose_card(lastCard);
-  if (chosen == null) {
-    chosen = bots.get(index).choose_card(lastCard); // choose_card performs draw_until
+  Card chosen = null;
+  if (lastCard.type == 3) {
+     for (int i = 0; i < bots.get(index).deck.size(); i++) {
+        if (bots.get(index).deck.get(i).type == 3) {
+           chosen = bots.get(index).deck.get(i);
+           break;
+        }
+     }
+     if (chosen == null) {
+      for (int x = 0; x < stack; x++) {
+        bots.get(index).deck.add(bots.get(index).get_random_card());
+      } 
+      stack = 0;
+      chosen = bots.get(index).choose_card(lastCard);
+      if (chosen == null) {
+        chosen = bots.get(index).choose_card(lastCard); // choose_card performs draw_until
+      }
+     }
+  } else {
+    for (int x = 0; x < stack; x++) {
+        bots.get(index).deck.add(bots.get(index).get_random_card());
+     } 
+     stack = 0;
+    chosen = bots.get(index).choose_card(lastCard);
+    if (chosen == null) {
+      chosen = bots.get(index).choose_card(lastCard); // choose_card performs draw_until
+    }
   }
   if (chosen.type > 0) {
     if (chosen.type == 2) {
@@ -279,11 +324,19 @@ void botTurn(int index) {
     if(chosen.type == 1){
        turnOrder = !turnOrder; 
     }
-     if (chosen.type == 5) {
+    if (chosen.type == 3) {
+      stack += 2; 
+    }
+     if (chosen.type >= 4) {
       Random rng = new Random();
       int randCard = rng.nextInt(bots.get(index).deck.size()); // TODO: dont choose wild and +4
       botCol = bots.get(index).deck.get(randCard).col;
-      chosen = new Card(botCol, -1, 5); // also change parameter for +4 or wild
+      if (chosen.type == 4) {
+         chosen = new Card(botCol, -1, 4);
+         stack += 4;
+      } else {
+        chosen = new Card(botCol, -1, 5); 
+      }
     }
   }
   image(chosen.sprite, 450, 350, 80, 160);  
