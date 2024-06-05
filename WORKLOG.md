@@ -28,11 +28,11 @@ Implemented arrows and visual indicators for turns
 
 Finished implementing visual arrows and added visuals for skip cards.
 
-## 6/3/2024
+### 6/3/2024
 
 Implemented reverse card functionalities
 
-## 6/5/2024
+### 6/5/2024
 
 bugfix bot counter
 
