@@ -41,8 +41,6 @@ void setup() {
 }
 
 void draw() {
-  if(turn < 0) turn += 4;
-  turn %= 4;
   fill(179, 98, 51);
   rect(110, 100, 800, 600); // the big brown
   fill(235, 218, 65);
@@ -100,17 +98,11 @@ void draw() {
     }
     if (millis() - invalidCardTime < 1000) text("Invalid Card", 400, 400);
   } else {
-    // System.out.println(turn);
     delay(1000);
     botTurn(turn % 4 - 1);
-    if (turnOrder && turn == 4) delayed = false;
-    if (!turnOrder && turn == 1) delayed = false;
+    if (turn == 4) delayed = false;
   }
-  // System.out.println("amongus" + turn);
-}
-
-void incrementTurn(){
-   turn = turnOrder ? turn + 1 : turn - 1;
+  turn %= 4;
 }
 
 void drawArrow() {
@@ -157,7 +149,7 @@ void playerTurn() {
 
 void mousePressed() {
   if (turn % 4 == 0 && wild) { // change to >= 4 for +4 card after wild card test
-    // System.out.println("hey");
+    System.out.println("hey");
     int color_num = overColors(mouseX, mouseY);
     while (!(color_num >= 0)) {}
     lastCard = new Card(color_num, -1, 5); // also change parameter for +4 or wild
@@ -168,7 +160,7 @@ void mousePressed() {
     else if (color_num == 3) { fill(255,255,0); }
     rect(450,350,80,160);
     wild = false;
-    incrementTurn();
+    turn++;
   } else {
     if (turn % 4 == 0) {
       int card_index = overCards(mouseX, mouseY);
@@ -182,23 +174,18 @@ void mousePressed() {
             } else {
               image(stop, 800, 350, 100, 100);
             }
-            incrementTurn();
+            turn++;
           } // skip card
           if (you.deck.get(card_index).type == 5) {
             wild = true;
           } // wild card
-           
-           //  reverse card
-           if(you.deck.get(card_index).type == 1){
-              turnOrder = !turnOrder; 
-           }
         }
         image(you.deck.get(card_index).sprite, 450, 350, 80, 160);
         lastCard = you.deck.get(card_index); // TODO: void sprite of placed card
         you.deck.remove(card_index);
         invalidCardTime = -69420;
         if (!wild) {
-          incrementTurn();
+          turn++;
         }
         delayed = true;
       } else if (card_index >= 0 && !you.deck.get(card_index).can_place(lastCard)) {
@@ -266,20 +253,11 @@ void botTurn(int index) {
           image(stop, 455, 120, 100, 100);
         }
       }
-      incrementTurn();
+      turn++;
     } // skip card
-    
-    // reverse
-    if(chosen.type == 1){
-       turnOrder = !turnOrder; 
-    }
-     if (chosen.type == 5) {
-      Random rng = new Random();
-      int oh = rng.nextInt(bots.get(index).deck.size());
-    }
   }
   image(chosen.sprite, 450, 350, 80, 160);
   lastCard = chosen;
   bots.get(index).deck.remove(chosen);
-  incrementTurn();
+  turn++;
 }
