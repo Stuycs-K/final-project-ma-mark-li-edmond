@@ -161,7 +161,6 @@ void mousePressed() {
     int color_num = overColors(mouseX, mouseY);
     while (!(color_num >= 0)) {}
     lastCard = new Card(color_num, -1, 5); // also change parameter for +4 or wild
-    //image(lastCard.sprite, 450, 350, 80, 160);
     if (color_num == 0) { fill(255,0,0); }
     else if (color_num == 1) { fill(0,255,0); }
     else if (color_num == 2) { fill(0,0,255); }
@@ -241,6 +240,7 @@ void createColorBounds() {
 }
 
 void botTurn(int index) {
+  int botCol = -1;
   Card chosen = bots.get(index).choose_card(lastCard);
   if (chosen == null) {
     chosen = bots.get(index).choose_card(lastCard); // choose_card performs draw_until
@@ -275,11 +275,29 @@ void botTurn(int index) {
     }
      if (chosen.type == 5) {
       Random rng = new Random();
-      int oh = rng.nextInt(bots.get(index).deck.size());
+      int randCard = rng.nextInt(bots.get(index).deck.size()); // TODO: dont choose wild and +4
+      botCol = bots.get(index).deck.get(randCard).col;
+      chosen = new Card(botCol, -1, 5); // also change parameter for +4 or wild
     }
   }
-  image(chosen.sprite, 450, 350, 80, 160);
+  image(chosen.sprite, 450, 350, 80, 160);  
   lastCard = chosen;
+  if (botCol == 0) { 
+    fill(255,0,0); 
+    rect(450,350,80,160);
+  }
+  else if (botCol == 1) { 
+    fill(0,255,0); 
+    rect(450,350,80,160);
+  }
+  else if (botCol == 2) { 
+    fill(0,0,255); 
+    rect(450,350,80,160);
+  }
+  else if (botCol == 3) { 
+    fill(255,255,0); 
+    rect(450,350,80,160);
+  }
   bots.get(index).deck.remove(chosen);
   incrementTurn();
 }
