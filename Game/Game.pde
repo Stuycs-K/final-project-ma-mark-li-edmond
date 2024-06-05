@@ -93,6 +93,7 @@ void draw() {
       delay(1000); // idk why i have to do this this is so dumb
       delayed = true;
     }
+    fill(0,0,0);
     if (millis() - drawedCardTime < 3000) {
       textSize(20);
       text("No Valid Cards. Automatically Drew Cards", 300, 400); // maybe animate drawing card one by one
@@ -136,9 +137,10 @@ void initializePlayer() {
 }
 
 void drawPlayer() {
+  int offset = max(0, 10 * (you.deck.size() - 8));
   for (int i = 0; i < you.deck.size(); i++) {
     Card c = you.deck.get(i);
-    image(c.sprite, c.minRow, c.minCol, c.maxRow - c.minRow, c.maxCol - c.minCol);
+    image(c.sprite, c.minRow, c.minCol - offset, c.maxRow - c.minRow, c.maxCol - c.minCol);
   }
 }
 
@@ -186,6 +188,10 @@ void mousePressed() {
           if (you.deck.get(card_index).type == 5) {
             wild = true;
           } // wild card
+           // +4 card
+           
+           // add later if your name is edmond
+          // if(you.deck.get(card_index).type == 
            
            //  reverse card
            if(you.deck.get(card_index).type == 1){
