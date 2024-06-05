@@ -32,6 +32,10 @@ Finished implementing visual arrows and added visuals for skip cards.
 
 Implemented reverse card functionalities
 
+## 6/5/2024
+
+bugfix bot counter
+
 ## EDMOND
 
 ### 5/22/2024
