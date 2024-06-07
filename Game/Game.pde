@@ -86,7 +86,13 @@ void draw() {
   initializePlayer();
   drawPlayer();
   text(turn, 200, 200);
-  if (turn % 4 == 0) {
+  //if (turn % 4 == 0) {
+  //  if (lastCard.type == 4) {
+  //  for (int i = 0; i < stack; i++) {     TODO: make so you gain +4 cards before you place a card, also for bot
+  //    you.deck.add(you.get_random_card()); 
+  //  }
+  //  stack = 0;
+  //}
     playerTurn();
     if (wild) {
       createColorBounds();
@@ -147,12 +153,6 @@ void drawPlayer() {
 }
 
 void playerTurn() {
-  //if (lastCard.type == 4) {
-  //  for (int i = 0; i < stack; i++) {
-  //    you.deck.add(you.get_random_card()); 
-  //  }
-  //  stack = 0;
-  //}
   boolean flag = false;
   for (int i = 0; i < you.deck.size(); i++) {
     if (you.deck.get(i).can_place(lastCard)) {
@@ -186,7 +186,7 @@ void mousePressed() {
     if (turn % 4 == 0) {
       int card_index = overCards(mouseX, mouseY);
       if (card_index >= 0 && you.deck.get(card_index).can_place(lastCard)) {
-        if (!(you.deck.get(card_index).type == 3 && lastCard.type == 3)){
+        if (you.deck.get(card_index).type != 3 && lastCard.type == 3){
           for (int i = 0; i < stack; i++) {
              you.deck.add(you.get_random_card());
           }

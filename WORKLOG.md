@@ -65,3 +65,7 @@ implemented wild card functionality for playerTurn
 ### 6/4/2024
 
 Implemented wild card for bot somewhat working
+
+### 6/5/2024
+
+Implemented +2 and +4 functionality
