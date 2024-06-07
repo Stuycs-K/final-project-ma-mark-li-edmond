@@ -7,6 +7,7 @@ public int invalidCardTime;
 public boolean turnOrder;
 public boolean wild;
 public int stack;
+public int botCol;
 PImage rightArrow;
 PImage leftArrow;
 PImage upArrow;
@@ -34,6 +35,7 @@ void setup() {
   drawedCardTime = -69420;
   wild = false;
   stack = 0;
+  botCol = -1;
   turnOrder = true; // TODO IMPLEMENT ARROWS
   rightArrow = loadImage("Images/right_arrow.png");
   leftArrow = loadImage("Images/left_arrow.png");
@@ -45,6 +47,14 @@ void setup() {
 void draw() {
   if(turn < 0) turn += 4;
   turn %= 4;
+  if (turn % 4 != 0) {
+    if (lastCard.type == 4) {
+     for (int x = 0; x < stack; x++) {
+        bots.get(turn % 4 - 1).deck.add(bots.get(turn % 4 - 1).get_random_card());
+     } 
+     stack = 0; 
+    } 
+  }
   fill(179, 98, 51);
   rect(110, 100, 800, 600); // the big brown
   fill(235, 218, 65);
@@ -81,18 +91,13 @@ void draw() {
     text("you lost, you noob", 400, 400);
     return;
   }
-
-  image(lastCard.sprite, 450, 350, 80, 160); // last card
+  if (botCol < 0) {
+    image(lastCard.sprite, 450, 350, 80, 160); // last card
+  } 
   initializePlayer();
   drawPlayer();
   text(turn, 200, 200);
-  //if (turn % 4 == 0) {
-  //  if (lastCard.type == 4) {
-  //  for (int i = 0; i < stack; i++) {     TODO: make so you gain +4 cards before you place a card, also for bot
-  //    you.deck.add(you.get_random_card()); 
-  //  }
-  //  stack = 0;
-  //}
+  if (turn % 4 == 0) {
     playerTurn();
     if (wild) {
       createColorBounds();
@@ -153,6 +158,28 @@ void drawPlayer() {
 }
 
 void playerTurn() {
+  if (botCol == 0) {
+    fill(255,0,0); 
+    rect(450,350,80,160);
+  }
+  else if (botCol == 1) { 
+    fill(0,255,0); 
+    rect(450,350,80,160);
+  }
+  else if (botCol == 2) { 
+    fill(0,0,255); 
+    rect(450,350,80,160);
+  }
+  else if (botCol == 3) { 
+    fill(255,255,0); 
+    rect(450,350,80,160);
+  }
+  if (lastCard.type == 4 && !wild) {
+    for (int i = 0; i < stack; i++) {  
+      you.deck.add(you.get_random_card()); 
+    }
+    stack = 0;
+  }
   boolean flag = false;
   for (int i = 0; i < you.deck.size(); i++) {
     if (you.deck.get(i).can_place(lastCard)) {
@@ -184,6 +211,7 @@ void mousePressed() {
     incrementTurn();
   } else {
     if (turn % 4 == 0) {
+      botCol = -1;
       int card_index = overCards(mouseX, mouseY);
       if (card_index >= 0 && you.deck.get(card_index).can_place(lastCard)) {
         if (you.deck.get(card_index).type != 3 && lastCard.type == 3){
@@ -267,7 +295,7 @@ void createColorBounds() {
 }
 
 void botTurn(int index) {
-  int botCol = -1;
+  botCol = -1;
   Card chosen = null;
   if (lastCard.type == 3) {
      for (int i = 0; i < bots.get(index).deck.size(); i++) {
@@ -287,10 +315,6 @@ void botTurn(int index) {
       }
      }
   } else {
-    for (int x = 0; x < stack; x++) {
-        bots.get(index).deck.add(bots.get(index).get_random_card());
-     } 
-     stack = 0;
     chosen = bots.get(index).choose_card(lastCard);
     if (chosen == null) {
       chosen = bots.get(index).choose_card(lastCard); // choose_card performs draw_until
