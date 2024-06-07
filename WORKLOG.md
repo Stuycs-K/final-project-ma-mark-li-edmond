@@ -69,3 +69,7 @@ Implemented wild card for bot somewhat working
 ### 6/5/2024
 
 Implemented +2 and +4 functionality
+
+### 6/7/2024
+
+Fixed +4 displaying number of cards and wild color disappear bug
