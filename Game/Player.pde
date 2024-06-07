@@ -5,7 +5,7 @@ public class Player{
 	public Random rng = new Random();
 	public Player(){
 		// start with 8 cards
-		for(int i = 0; i < 8; i++){
+		for(int i = 0; i < 17; i++){
 			deck.add(get_random_card());
 		}
 	}
