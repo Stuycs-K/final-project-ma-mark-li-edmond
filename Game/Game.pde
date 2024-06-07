@@ -341,7 +341,7 @@ void botTurn(int index) {
   }
   image(chosen.sprite, 450, 350, 80, 160);  
   lastCard = chosen;
-  if (botCol == 0) { 
+  if (botCol == 0) {
     fill(255,0,0); 
     rect(450,350,80,160);
   }
