@@ -5,7 +5,7 @@ public class Player{
 	public Random rng = new Random();
 	public Player(){
 		// start with 8 cards
-		for(int i = 0; i < 17; i++){
+		for(int i = 0; i < 14; i++){
 			deck.add(get_random_card());
 		}
 	}
@@ -15,9 +15,9 @@ public class Player{
    public Card get_random_card() {
       //  return new Card(rng.nextInt(4), rng.nextInt(10), 2); rig skips
       // return new Card(rng.nextInt(4), rng.nextInt(10), 1); // rig riverse
-      return new Card(rng.nextInt(4), rng.nextInt(10), 4); // rig +4
-      // int type = rng.nextInt(5) <= 2 ? 0 : rng.nextInt(6);
-      //return new Card(rng.nextInt(4), rng.nextInt(10), type); 
+      // return new Card(rng.nextInt(4), rng.nextInt(10), 4); // rig +4
+      int type = rng.nextInt(5) <= 2 ? 0 : rng.nextInt(6);
+      return new Card(rng.nextInt(4), rng.nextInt(10), type); 
    }
 
 	// TODO: DRAW UNTIL SATISFACTORY
@@ -36,4 +36,22 @@ public class Player{
 			deck.add(c); 
 		}
 	}
+
+  public void readjust_deck(Card last_placed){
+      boolean[] can = new boolean[deck.size()];
+      for(int i = 0; i < deck.size(); i++){
+         if(deck.get(i).can_place(last_placed)){
+            can[i] = true;
+         }
+      }
+      ArrayList<Card> new_deck = new ArrayList<Card>();
+      for(int i = 0; i < deck.size(); i++){
+         if(can[i]) new_deck.add(deck.get(i)); 
+      }
+      for(int i = 0; i < deck.size(); i++){
+         if(!can[i]) new_deck.add(deck.get(i)); 
+      }
+      deck = new_deck;
+  }
+
 }
