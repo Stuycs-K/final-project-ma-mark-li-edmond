@@ -75,22 +75,36 @@ void draw() {
     text(bots.get(0).deck.size(), 160, 410); // left display
     text(bots.get(1).deck.size(), 500, 180); // top display
     text(bots.get(2).deck.size(), 840, 410); // right display
-    text("you won, you noob", 400, 400);
+    fill(0,255,0);
+    rect(250,350,500,70);
+    fill(0,0,0);
+    text("You have Winned!", 320, 400);
     return;
   }
-  text(bots.get(0).deck.size(), 160, 410); // left display
+  
+      text(bots.get(0).deck.size(), 160, 410); // left display
   text(bots.get(1).deck.size(), 500, 180); // top display
   text(bots.get(2).deck.size(), 840, 410); // right display
-  drawArrow();
 
   if (bots.get(0).deck.size() == 0 || bots.get(1).deck.size() == 0 || bots.get(2).deck.size() == 0) {
+    if(bots.get(0).deck.size() == 0) fill(0,255,0);
     text(bots.get(0).deck.size(), 160, 410); // left display
+    if(bots.get(0).deck.size() == 0) fill(100,100,100);
+    if(bots.get(1).deck.size() == 0) fill(0,255,0);
     text(bots.get(1).deck.size(), 500, 180); // top display
+    if(bots.get(1).deck.size() == 0) fill(100,100,100);
+    if(bots.get(2).deck.size() == 0) fill(0,255,0);
     text(bots.get(2).deck.size(), 840, 410); // right display
+    if(bots.get(2).deck.size() == 0) fill(100,100,100);
     textSize(50);
-    text("you lost, you noob", 400, 400);
+    fill(255,0,0);
+    rect(250,350,500,70);
+    fill(0,0,0);
+    text("You have Losed!", 320, 400);
     return;
   }
+  
+  drawArrow();
   if (botCol < 0) {
     image(lastCard.sprite, 450, 350, 80, 160); // last card
   } 
@@ -108,11 +122,19 @@ void draw() {
     }
     fill(0,0,0);
     if (millis() - drawedCardTime < 3000) {
-      textSize(20);
-      text("No Valid Cards. Automatically Drew Cards", 300, 400); // maybe animate drawing card one by one
+      fill(255,255,255);
+      rect(150,260,700,70);
+      fill(0,0,0);
       textSize(40);
+      text("No Valid Cards. Automatically Drew Cards", 150, 300); // maybe animate drawing card one by one
     }
-    if (millis() - invalidCardTime < 1000) text("Invalid Card", 400, 400);
+    if (millis() - invalidCardTime < 1000){
+      fill(255,255,255);
+      rect(400,260,200,70);
+       fill(0,0,0);
+      textSize(40);
+      text("Invalid Card", 400, 300);
+    }
   } else {
     // System.out.println(turn);
     delay(1000);
