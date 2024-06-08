@@ -36,6 +36,10 @@ Implemented reverse card functionalities
 
 bugfix bot counter
 
+bugfix text, make it look nicer
+
+tried my best to center the cards
+
 ## EDMOND
 
 ### 5/22/2024
