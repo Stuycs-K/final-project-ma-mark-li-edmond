@@ -56,7 +56,7 @@ void draw() {
     } 
   }
   fill(179, 98, 51);
-  rect(110, 100, 800, 600); // the big brown
+  rect(90, 80, 820, 620); // the big brown
   fill(235, 218, 65);
   if (turn == 1) fill(100, 100, 100);
   else fill(235, 218, 65);
@@ -141,19 +141,26 @@ void drawArrow() {
   }
 }
 
+
 void initializePlayer() {
   // READJUST HERE
+  int offset = max(0, 8 * (you.deck.size() - 6));
   int start = 300 - 10 * max(0, you.deck.size() - 8);
   for (int i = 0; i < you.deck.size(); i++) {
-    you.deck.get(i).set(start + i * 50, 600, start + (i + 1) * 50, 700);
+    you.deck.get(i).set(start + i * 50 - offset, 600, start + (i + 1) * 50 - offset, 700);
   }
 }
 
 void drawPlayer() {
-  int offset = max(0, 10 * (you.deck.size() - 8));
-  for (int i = 0; i < you.deck.size(); i++) {
+  int cap_size = 15;
+  for (int i = 0; i < min(you.deck.size(), cap_size); i++) {
     Card c = you.deck.get(i);
-    image(c.sprite, c.minRow, c.minCol - offset, c.maxRow - c.minRow, c.maxCol - c.minCol);
+    image(c.sprite, c.minRow, c.minCol, c.maxRow - c.minRow, c.maxCol - c.minCol);
+  }
+  if(you.deck.size() > 15){
+      rect(280,720,500,30);
+      textSize(20);
+      text("You have " + (you.deck.size() - cap_size) + " more cards, but not all are displayed", 300, 750); 
   }
 }
 
