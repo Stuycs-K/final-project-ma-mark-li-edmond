@@ -13,6 +13,8 @@ Our game will be based on the card game Uno. In the game, you and 3 other bots a
 
 Prototype document: https://docs.google.com/document/d/12uVMGuq9BQTml1k-FR3xKLAhHKb0poaT-JJnAuib5ws/edit?usp=sharing
 
+Demo Video: https://drive.google.com/file/d/1uzfkRiiiXtMUOhtlcY55X_1eMvxufrSk/view?usp=sharing
+
 ## Instructions
 
 To play the game, just run Game.pde, no libraries necessary.
