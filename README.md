@@ -11,6 +11,8 @@ Self-alleged Spanish Speaking Specialists
 
 Our game will be based on the card game Uno. In the game, you and 3 other bots are going to play the game until one person empties their deck. At the start, each player gets 8 random cards . Initially, the turn order is counterclockwise. On your turn, you can place your card down only if it is the same color or number as the previous card placed down, or keep drawing until you get a card you can place down. There are also special cards such as reverse the turn order, skip the turn of the next player, add more cards to the next player, and force the color of the card. 
 
+Prototype document: https://docs.google.com/document/d/12uVMGuq9BQTml1k-FR3xKLAhHKb0poaT-JJnAuib5ws/edit?usp=sharing
+
 ## Instructions
 
 To play the game, just run Game.pde, no libraries necessary.
