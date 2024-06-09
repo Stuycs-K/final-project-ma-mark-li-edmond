@@ -73,3 +73,7 @@ Implemented +2 and +4 functionality
 ### 6/7/2024
 
 Fixed +4 displaying number of cards and wild color disappear bug
+
+### 6/8/2024
+
+Bug fixes and added a color aura for wilds and +4 instead of big color block
