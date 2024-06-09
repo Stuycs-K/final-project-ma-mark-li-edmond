@@ -105,9 +105,15 @@ void draw() {
   }
   
   drawArrow();
-  if (botCol < 0) {
-    image(lastCard.sprite, 450, 350, 80, 160); // last card
-  } 
+  if (botCol >= 0) {
+    if (botCol == 0) { stroke(255,0,0); }
+    else if (botCol == 1) { stroke(0,255,0); }
+    else if (botCol == 2) { stroke(0,0,255); }
+    else if (botCol == 3) { stroke(255,255,0); }
+    rect(450,350,80,160);
+    noStroke();
+  }
+  image(lastCard.sprite, 450, 350, 80, 160); // last card
   initializePlayer();
   drawPlayer();
   // text(turn, 200, 200);
@@ -197,37 +203,23 @@ void drawPlayer() {
 }
 
 void playerTurn() {
-  if (botCol == 0) {
-    fill(255,0,0); 
-    rect(450,350,80,160);
-  }
-  else if (botCol == 1) { 
-    fill(0,255,0); 
-    rect(450,350,80,160);
-  }
-  else if (botCol == 2) { 
-    fill(0,0,255); 
-    rect(450,350,80,160);
-  }
-  else if (botCol == 3) { 
-    fill(255,255,0); 
-    rect(450,350,80,160);
-  }
   if (lastCard.type == 4 && !wild) {
     for (int i = 0; i < stack; i++) {  
       you.deck.add(you.get_random_card()); 
     }
     stack = 0;
   }
-  boolean flag = false;
-  for (int i = 0; i < you.deck.size(); i++) {
-    if (you.deck.get(i).can_place(lastCard)) {
-      flag = true;
+  if (!wild) {
+    boolean flag = false;
+    for (int i = 0; i < you.deck.size(); i++) {
+      if (you.deck.get(i).can_place(lastCard)) {
+        flag = true;
+      }
     }
-  }
-  if (!flag) {
-    you.add_to_deck(you.draw_until(lastCard));
-    drawedCardTime = millis();
+    if (!flag) {
+      you.add_to_deck(you.draw_until(lastCard));
+      drawedCardTime = millis();
+    }
   }
 }
 
@@ -235,18 +227,22 @@ void mousePressed() {
   if (turn % 4 == 0 && wild) {
     // System.out.println("hey");
     int color_num = overColors(mouseX, mouseY);
-    while (!(color_num >= 0)) {}
-    if (lastCard.type == 4) {
-      lastCard = new Card(color_num, -1, 4);
-    } else {
-      lastCard = new Card(color_num, -1, 5); 
+    if (color_num >= 0) {
+      if (color_num == 0) { stroke(255,0,0); }
+      else if (color_num == 1) { stroke(0,255,0); }
+      else if (color_num == 2) { stroke(0,0,255); }
+      else if (color_num == 3) { stroke(255,255,0); }
+      rect(450,350,80,160);
+      if (lastCard.type == 4) {
+        lastCard = new Card(color_num, -1, 4);
+        image(lastCard.sprite, 450, 350, 80, 160);
+      } else {
+        lastCard = new Card(color_num, -1, 5); 
+        image(lastCard.sprite, 450, 350, 80, 160);
+      }
+      wild = false;
     }
-    if (color_num == 0) { fill(255,0,0); }
-    else if (color_num == 1) { fill(0,255,0); }
-    else if (color_num == 2) { fill(0,0,255); }
-    else if (color_num == 3) { fill(255,255,0); }
-    rect(450,350,80,160);
-    wild = false;
+    noStroke();
     incrementTurn();
   } else {
     if (turn % 4 == 0) {
@@ -392,8 +388,10 @@ void botTurn(int index) {
     }
      if (chosen.type >= 4) {
       Random rng = new Random();
-      int randCard = rng.nextInt(bots.get(index).deck.size()); // TODO: dont choose wild and +4
-      botCol = bots.get(index).deck.get(randCard).col;
+      if (!bots.get(index).deck.isEmpty()) {
+        int randCard = rng.nextInt(bots.get(index).deck.size()); 
+        botCol = bots.get(index).deck.get(randCard).col;
+      }
       if (chosen.type == 4) {
          chosen = new Card(botCol, -1, 4);
          stack += 4;
@@ -402,24 +400,22 @@ void botTurn(int index) {
       }
     }
   }
-  image(chosen.sprite, 450, 350, 80, 160);  
-  lastCard = chosen;
   if (botCol == 0) {
-    fill(255,0,0); 
-    rect(450,350,80,160);
+    stroke(255,0,0); 
   }
   else if (botCol == 1) { 
-    fill(0,255,0); 
-    rect(450,350,80,160);
+    stroke(0,255,0); 
   }
   else if (botCol == 2) { 
-    fill(0,0,255); 
-    rect(450,350,80,160);
+    stroke(0,0,255); 
   }
   else if (botCol == 3) { 
-    fill(255,255,0); 
-    rect(450,350,80,160);
+    stroke(255,255,0); 
   }
+  rect(450,350,80,160);
+  image(chosen.sprite, 450, 350, 80, 160);  
+  lastCard = chosen;
   bots.get(index).deck.remove(chosen);
+  noStroke();
   incrementTurn();
 }
