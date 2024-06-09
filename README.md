@@ -15,7 +15,7 @@ Our game will be based on the card game Uno. In the game, you and 3 other bots a
 
 To play the game, just run Game.pde, no libraries necessary.
 
-On your turn, you can click the card you want to place. If it's an invalid placement, a text will appear on the screen. If it's a wild card where you can choose the color, click one of the four colored block in the center and the game will move on.
+On your turn, you can click the card you want to place. If it's an invalid placement, a text will appear on the screen. If it's a wild card where you can choose the color, click one of the four colored block in the center and the game will move on. If the last card is a +2 card, you can play a non +2 card and draw two cards or play a +2 card to stack.  
 
 ## Presentation
 
