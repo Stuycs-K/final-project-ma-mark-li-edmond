@@ -24,3 +24,4 @@ On your turn, you can click the card you want to place. If it's an invalid place
 ## Known Bugs
 
 - Cards not centered entirely accurately
+- If it is your turn and the previous card is a wild card, then if you don't click on a card, the color outline for the wild card will disappear. 
