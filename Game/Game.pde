@@ -203,7 +203,7 @@ void drawPlayer() {
 }
 
 void playerTurn() {
-  if (lastCard.type == 4 && !wild) {
+  if ((lastCard.type == 4 && !wild) || (lastCard.type == 3 && !player_inv(you))) {
     for (int i = 0; i < stack; i++) {  
       you.deck.add(you.get_random_card()); 
     }
@@ -295,6 +295,16 @@ void mousePressed() {
       }
     }
   }
+}
+
+boolean player_inv(Player m) {
+  boolean p = false;
+  for (int i = 0; i < m.deck.size(); i++) {
+     if (m.deck.get(i).type == 3) {
+       p = true; 
+     }
+  }
+  return p;
 }
 
 int overCards(int x, int y) {
