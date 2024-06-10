@@ -36,6 +36,10 @@ Implemented reverse card functionalities
 
 bugfix bot counter
 
+### 6/9/2024
+
+Implemented card capping. If your cards exceed 15, not all cards will display, but it will be guaranteed you can always place a card.
+
 ## EDMOND
 
 ### 5/22/2024
